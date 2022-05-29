@@ -14,19 +14,20 @@ def find_min_edge(graph):
             min_edge = edge
     return min_edge
 
+
 # Find the minimum spanning tree
 def mst(graph):
     # Initialize the minimum spanning tree
-    mst = nx.Graph()
-    mst.add_nodes_from(graph.nodes)
+    min_tree = nx.Graph()
+    min_tree.add_nodes_from(graph.nodes)
 
     # Add the first edge
     min_edge = find_min_edge(graph)
-    mst.add_edge(min_edge[0], min_edge[1], weight=graph.edges[min_edge]["weight"])
+    min_tree.add_edge(min_edge[0], min_edge[1], weight=graph.edges[min_edge]["weight"])
 
     # Add the remaining edges
-    while len(mst.edges) < len(graph.nodes) - 1:
-        min_edge = find_min_edge(mst)
-        mst.add_edge(min_edge[0], min_edge[1], weight=graph.edges[min_edge]["weight"])
+    while len(min_tree.edges) < len(graph.nodes) - 1:
+        min_edge = find_min_edge(min_tree)
+        min_tree.add_edge(min_edge[0], min_edge[1], weight=graph.edges[min_edge]["weight"])
 
-    return mst
+    return min_tree

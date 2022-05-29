@@ -21,8 +21,6 @@ nx.draw(graph)
 nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels)
 plt.show()
 
-print(graph.edges)
-
 # Run our implementation
 mst_graph = mst(graph)
 
