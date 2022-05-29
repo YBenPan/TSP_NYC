@@ -21,6 +21,30 @@ nx.draw(graph)
 nx.draw_networkx_edge_labels(graph, pos, edge_labels=labels)
 plt.show()
 
+
+# Check triangle inequality
+def check_triangle_inequality(tri_inequality_graph):
+    for edge in tri_inequality_graph.edges:
+        if tri_inequality_graph.edges[edge]["weight"] < 0:
+            return False
+    return True
+
+
+# Check if graph is connected
+def check_connected(connected_graph):
+    return nx.is_connected(connected_graph)
+
+
+# Check if graph is a tree
+def check_tree(tree_graph):
+    return nx.is_tree(tree_graph)
+
+
+check_triangle_inequality(graph)
+check_connected(graph)
+check_tree(graph)
+
+
 # Run our implementation
 mst_graph = mst(graph)
 
