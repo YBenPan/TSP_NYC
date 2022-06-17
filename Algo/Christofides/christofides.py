@@ -19,6 +19,45 @@ def cost(adj, cycle):
         cost += adj[node][next_node]
     return cost
 
+def shortcutting(circuit):
+    nodes = []
+    for u, v in circuit:
+        if not nodes:
+            nodes.append(u)
+        if v not in nodes:
+            nodes.append(v)
+    nodes.append(nodes[0])
+    return nodes
+
+def christofides(G, weight="weight"):
+    loop_nodes = (n for n, neighbors in G.adj.items() if n in neighbors)
+    try:
+        node = next(loop_nodes)
+    except StopIteration:
+        pass
+    else:
+        G = G.copy()
+        G.remove_edge(node, node)
+        G.remove_edges_from((n, n) for n in loop_nodes)
+    check = False
+    for n,ndict in G.adj.items():
+        if len(ndict)!=len(G)-1:
+            check=True
+            break
+    if check:
+        raise nx.NetworkXError("G must be a complete graph.")
+    tree = nx.minimum_spanning_tree(G)
+    L = G.copy()
+    nodes = []
+    for v,degree in (tree.degree):
+        if degree%2==0: 
+            nodes.append(v)
+    L.remove_nodes_from(nodes)
+    MG = nx.MultiGraph()
+    MG.add_edges_from(tree.edges)
+    edges = nx.min_weight_matching(L)
+    MG.add_edges_from(edges)
+    return shortcutting(nx.eulerian_circuit(MG))
 
 def main():
 
@@ -27,7 +66,7 @@ def main():
 
     pos[0] = (0.5, 0.5)
 
-    cycle = nx.approximation.christofides(G, weight="weight")
+    cycle = christofides(G)
     edge_list = list(nx.utils.pairwise(cycle))
 
     nx.draw_networkx(
