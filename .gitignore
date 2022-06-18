@@ -3,3 +3,5 @@
 /.vscode/
 /.git/
 /venv/
+/ML/data/nyc-taxi-trip-duration/train.csv
+/ML/data/nyc-taxi-trip-duration/test.csv
