@@ -6,9 +6,9 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 # Import data
-data_path = os.path.abspath("../data")
-data_file = "/test1.csv"
-adj = pd.read_csv(data_path + data_file, header=None)
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+data_file = os.path.join(ROOT_DIR, "Algo", "data", "test1.csv")
+adj = pd.read_csv(data_file, header=None)
 adj = adj.to_numpy()
 
 

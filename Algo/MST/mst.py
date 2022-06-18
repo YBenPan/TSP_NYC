@@ -9,9 +9,9 @@ import matplotlib.pyplot as plt
 from mst_impl import find_min_edge, mst
 
 # Import data
-data_path = os.path.abspath("../data")
-data_file = "/test1.csv"
-data = pd.read_csv(data_path + data_file, header=None)
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+data_file = os.path.join(ROOT_DIR, "Algo", "data", "test1.csv")
+data = pd.read_csv(data_file, header=None)
 data = data.to_numpy()
 
 graph = nx.from_numpy_array(data)
