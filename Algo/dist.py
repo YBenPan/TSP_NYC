@@ -1,4 +1,3 @@
-from calendar import week
 import pickle
 import os
 import pandas as pd
@@ -65,6 +64,8 @@ for i, (lat1, lon1) in enumerate(zip(latitudes, longitudes)):
         # print(f"{locations[i]} --> {locations[j]} takes {y} minutes")
         adj_matrix[i][j] = y
 cycle, cost = christofides(adj=adj_matrix)
+print(f"{locations[0]}", end="")
 for i, node in enumerate(cycle[:-1]):
     next_node = cycle[i + 1]
-    print(f"{locations[node]} --> {locations[next_node]} takes {int(adj_matrix[node][next_node])} minutes")
+    time = int(adj_matrix[node][next_node])
+    print(f" --({time})--> {locations[next_node]}", end="")
